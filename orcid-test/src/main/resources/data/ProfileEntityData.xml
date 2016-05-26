@@ -435,6 +435,7 @@
             orcid_type="USER" 
             claimed="true"
             reviewed="true"
+            deprecated_date="2016-03-29 15:31:00.00"
             primary_record="0000-0000-0000-0003"
             client_source_id="APP-5555555555555555"
             record_locked="false"

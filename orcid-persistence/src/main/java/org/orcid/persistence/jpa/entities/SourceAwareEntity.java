@@ -36,8 +36,7 @@ import org.springframework.context.ApplicationContext;
 public abstract class SourceAwareEntity<T extends Serializable> extends BaseEntity<T> {
     private static final long serialVersionUID = -5397119397438830995L;
     protected String sourceId;
-    protected String clientSourceId;
-    private SourceEntityCacheManager sourceEntityCacheManager;
+    protected String clientSourceId;    
 
     @Column(name = "source_id")
     public String getSourceId() {
@@ -63,10 +62,8 @@ public abstract class SourceAwareEntity<T extends Serializable> extends BaseEnti
             return null;
         }
         
-        if(sourceEntityCacheManager == null) {
-            ApplicationContext ctx = ApplicationContextProvider.getApplicationContext();
-            sourceEntityCacheManager = (SourceEntityCacheManager)ctx.getBean("sourceEntityCacheManager");
-        }
+        ApplicationContext ctx = ApplicationContextProvider.getApplicationContext();
+        SourceEntityCacheManager sourceEntityCacheManager = (SourceEntityCacheManager)ctx.getBean("sourceEntityCacheManager");        
         return sourceEntityCacheManager.retrieve(getElementSourceId());
     }
 
