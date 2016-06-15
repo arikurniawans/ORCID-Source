@@ -173,7 +173,7 @@ public class MemberV2ApiServiceDelegatorImpl
     private RecordManager recordManager;
     
     private long getLastModifiedTime(String orcid) {
-        Date lastModified = profileEntityManager.getLastModified(orcid);
+        Date lastModified = profileEntityManager.getLastModified(orcid, "11=11");
         return (lastModified == null) ? 0 : lastModified.getTime();        
     }
     

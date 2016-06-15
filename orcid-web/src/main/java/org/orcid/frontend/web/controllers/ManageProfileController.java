@@ -297,7 +297,7 @@ public class ManageProfileController extends BaseWorkspaceController {
             // Clear the delegate's profile from the cache so that the granting
             // user is visible to them immediately
             profileEntityManager.updateLastModifed(delegateOrcid);
-            Date delegateLastModified = profileEntityManager.getLastModified(delegateOrcid);
+            Date delegateLastModified = profileEntityManager.getLastModified(delegateOrcid, "8=8");
             GivenPermissionToEntity permission = new GivenPermissionToEntity();
             permission.setGiver(currentUserOrcid);
             ProfileSummaryEntity receiver = new ProfileSummaryEntity(delegateOrcid);
@@ -816,7 +816,7 @@ public class ManageProfileController extends BaseWorkspaceController {
 
     @RequestMapping(value = "/countryForm.json", method = RequestMethod.GET)
     public @ResponseBody AddressesForm getProfileCountryJson(HttpServletRequest request) throws NoSuchRequestHandlingMethodException {        
-        Date lastModified = profileEntityManager.getLastModified(getCurrentUserOrcid());
+        Date lastModified = profileEntityManager.getLastModified(getCurrentUserOrcid(), "9=9");
         long lastModifiedTime = (lastModified == null) ? 0 : lastModified.getTime();
         
         ProfileEntity profile = profileEntityCacheManager.retrieve(getCurrentUserOrcid());        
@@ -1012,7 +1012,7 @@ public class ManageProfileController extends BaseWorkspaceController {
                         // the granting
                         // user is visible to them immediately
                         profileEntityManager.updateLastModifed(trustedOrcid);
-                        Date delegateLastModified = profileEntityManager.getLastModified(trustedOrcid);
+                        Date delegateLastModified = profileEntityManager.getLastModified(trustedOrcid, "10=10");
                         GivenPermissionToEntity permission = new GivenPermissionToEntity();
                         permission.setGiver(managedOrcid);
                         ProfileSummaryEntity receiver = new ProfileSummaryEntity(trustedOrcid);

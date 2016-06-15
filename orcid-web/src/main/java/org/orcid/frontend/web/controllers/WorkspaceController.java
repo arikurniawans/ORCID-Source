@@ -136,7 +136,7 @@ public class WorkspaceController extends BaseWorkspaceController {
     private IdentifierTypeManager identifierTypeManager;
     
     private long getLastModifiedTime(String orcid) {
-        Date lastModified = profileEntityManager.getLastModified(orcid);
+        Date lastModified = profileEntityManager.getLastModified(orcid, "25=25");
         return (lastModified == null) ? 0 : lastModified.getTime();
     }
     

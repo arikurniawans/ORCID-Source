@@ -66,7 +66,7 @@ public class OtherNameManagerImpl implements OtherNameManager {
     private ProfileEntityCacheManager profileEntityCacheManager;
     
     private long getLastModified(String orcid) {
-        Date lastModified = profileEntityManager.getLastModified(orcid);
+        Date lastModified = profileEntityManager.getLastModified(orcid, "14=14");
         return (lastModified == null) ? 0 : lastModified.getTime();
     }
     

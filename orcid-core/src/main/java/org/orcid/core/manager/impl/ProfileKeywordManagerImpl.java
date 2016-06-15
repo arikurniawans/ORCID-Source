@@ -66,7 +66,7 @@ public class ProfileKeywordManagerImpl implements ProfileKeywordManager {
     private ProfileEntityCacheManager profileEntityCacheManager;
     
     private long getLastModified(String orcid) {
-        Date lastModified = profileEntityManager.getLastModified(orcid);
+        Date lastModified = profileEntityManager.getLastModified(orcid, "17=17");
         return (lastModified == null) ? 0 : lastModified.getTime();
     }
     

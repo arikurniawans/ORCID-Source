@@ -52,7 +52,7 @@ public class ProfileEntityCacheManagerImpl implements ProfileEntityCacheManager 
     @Transactional
     public ProfileEntity retrieve(String orcid) throws IllegalArgumentException {
         Object key = new OrcidCacheKey(orcid, releaseName);
-        Date dbDate = profileEntityManager.getLastModified(orcid);
+        Date dbDate = profileEntityManager.getLastModified(orcid, "16=16");
         ProfileEntity profile = toProfileEntity(profileCache.get(key));
         if (needsFresh(dbDate, profile))
             try {

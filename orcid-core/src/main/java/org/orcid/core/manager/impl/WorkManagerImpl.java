@@ -185,7 +185,7 @@ public class WorkManagerImpl implements WorkManager {
         
         if (applyAPIValidations) {
             activityValidator.validateWork(work, sourceEntity, true, applyAPIValidations, null);
-            Date lastModified = profileEntityManager.getLastModified(orcid);
+            Date lastModified = profileEntityManager.getLastModified(orcid, "21=21");
             long lastModifiedTime = (lastModified == null) ? 0 : lastModified.getTime();
             List<MinimizedWorkEntity> works = workCacheManager.retrieveMinimizedWorks(orcid, lastModifiedTime);
             // If it is the user adding the peer review, allow him to add

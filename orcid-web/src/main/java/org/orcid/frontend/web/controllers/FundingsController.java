@@ -223,7 +223,7 @@ public class FundingsController extends BaseWorkspaceController {
     private List<String> createFundingIdList(HttpServletRequest request) {
         Map<String, String> languages = lm.buildLanguageMap(getUserLocale(), false);        
         String orcid = getEffectiveUserOrcid();
-        java.util.Date lastModified = profileEntityManager.getLastModified(orcid);        
+        java.util.Date lastModified = profileEntityManager.getLastModified(orcid, "7=7");        
         List<Funding> fundings = profileFundingManager.getFundingList(orcid, lastModified.getTime());                
         HashMap<String, FundingForm> fundingsMap = new HashMap<String, FundingForm>();
         List<String> fundingIds = new ArrayList<String>();

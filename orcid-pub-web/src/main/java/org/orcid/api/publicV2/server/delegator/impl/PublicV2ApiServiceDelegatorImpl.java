@@ -169,7 +169,7 @@ public class PublicV2ApiServiceDelegatorImpl
     private RecordManager recordManager;
     
     private long getLastModifiedTime(String orcid) {
-        Date lastModified = profileEntityManager.getLastModified(orcid);
+        Date lastModified = profileEntityManager.getLastModified(orcid, "18=18");
         return (lastModified == null) ? 0 : lastModified.getTime();        
     }
     
@@ -200,7 +200,7 @@ public class PublicV2ApiServiceDelegatorImpl
     @Override
     @AccessControl(requiredScope = ScopePathType.ORCID_WORKS_READ_LIMITED, enableAnonymousAccess = true)
     public Response viewWork(String orcid, Long putCode) {
-        Date lastModified = profileEntityManager.getLastModified(orcid);
+        Date lastModified = profileEntityManager.getLastModified(orcid, "19=19");
         long lastModifiedTime = (lastModified == null) ? 0 : lastModified.getTime();
         Work w = workManager.getWork(orcid, putCode, lastModifiedTime);
         orcidSecurityManager.checkIsPublic(w);

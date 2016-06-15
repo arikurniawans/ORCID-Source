@@ -66,7 +66,7 @@ public class AddressManagerImpl implements AddressManager {
     private ProfileEntityCacheManager profileEntityCacheManager;    
     
     private long getLastModified(String orcid) {
-        Date lastModified = profileEntityManager.getLastModified(orcid);
+        Date lastModified = profileEntityManager.getLastModified(orcid,"3=3");
         return (lastModified == null) ? 0 : lastModified.getTime();
     }
     

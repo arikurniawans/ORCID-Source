@@ -359,8 +359,8 @@ public class ProfileDaoImpl extends GenericDaoImpl<ProfileEntity, String> implem
     }
 
     @SuppressWarnings("unchecked")
-    public Date retrieveLastModifiedDate(String orcid) {
-        Query nativeQuery = entityManager.createNativeQuery("Select p.last_modified FROM profile p WHERE p.orcid =:orcid");
+    public Date retrieveLastModifiedDate(String orcid, String indicator) {
+        Query nativeQuery = entityManager.createNativeQuery("Select p.last_modified FROM profile p WHERE p.orcid =:orcid AND " + indicator);
         nativeQuery.setParameter("orcid", orcid);
         List<Timestamp> tsList = nativeQuery.getResultList();
         if (tsList != null && !tsList.isEmpty()) {

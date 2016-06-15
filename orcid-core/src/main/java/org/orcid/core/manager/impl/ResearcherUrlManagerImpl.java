@@ -73,7 +73,7 @@ public class ResearcherUrlManagerImpl implements ResearcherUrlManager {
     private ProfileEntityCacheManager profileEntityCacheManager;
     
     private long getLastModified(String orcid) {
-        Date lastModified = profileEntityManager.getLastModified(orcid);
+        Date lastModified = profileEntityManager.getLastModified(orcid, "20=20");
         return (lastModified == null) ? 0 : lastModified.getTime();
     }
 

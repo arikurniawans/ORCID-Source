@@ -298,7 +298,7 @@ public class WorksController extends BaseWorkspaceController {
         if (workId == null)
             return null;
 
-        java.util.Date lastModified = profileEntityManager.getLastModified(getEffectiveUserOrcid());
+        java.util.Date lastModified = profileEntityManager.getLastModified(getEffectiveUserOrcid(), "22=22");
         long lastModifiedTime = (lastModified == null) ? 0 : lastModified.getTime();
         Work work = workManager.getWork(this.getCurrentUserOrcid(), workId, lastModifiedTime);
 
@@ -708,7 +708,7 @@ public class WorksController extends BaseWorkspaceController {
     }
 
     public WorkForm validateWorkId(WorkForm work) {
-        java.util.Date lastModified = profileEntityManager.getLastModified(getEffectiveUserOrcid());
+        java.util.Date lastModified = profileEntityManager.getLastModified(getEffectiveUserOrcid(), "23=23");
         List<Work> works = workManager.findWorks(getEffectiveUserOrcid(), lastModified.getTime());
         if (works == null || works.isEmpty()) {
             setError(work, "manual_work_form_contents.edit_work.invalid_id");
@@ -749,7 +749,7 @@ public class WorksController extends BaseWorkspaceController {
      */
     private List<String> createWorksIdList(HttpServletRequest request) {
         String orcid = getEffectiveUserOrcid();
-        java.util.Date lastModified = profileEntityManager.getLastModified(orcid);
+        java.util.Date lastModified = profileEntityManager.getLastModified(orcid, "24=24");
         List<Work> works = workManager.findWorks(orcid, lastModified.getTime());
         HashMap<Long, WorkForm> worksMap = new HashMap<Long, WorkForm>();
         List<String> workIds = new ArrayList<String>();

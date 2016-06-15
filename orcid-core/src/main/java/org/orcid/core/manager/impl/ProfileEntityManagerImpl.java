@@ -423,7 +423,7 @@ public class ProfileEntityManagerImpl implements ProfileEntityManager {
         if (!orcidExists(orcid)) {
             throw new NoResultException();
         }
-        Date lastModified = getLastModified(orcid);
+        Date lastModified = getLastModified(orcid, "1=1");
         long lastModifiedTime = lastModified.getTime();
         ActivitiesSummary activities = new ActivitiesSummary();
 
@@ -603,13 +603,13 @@ public class ProfileEntityManagerImpl implements ProfileEntityManager {
         return result;
     }
 
-    public Date getLastModified(String orcid) {
+    public Date getLastModified(String orcid, String indicator) {
 //        ServletRequestAttributes sra = (ServletRequestAttributes)RequestContextHolder.getRequestAttributes();
         Date lastMod = null;
 //        if (sra != null)
 //            lastMod = (Date)sra.getAttribute(ProfileLastModifiedAspect.REQUEST_PROFILE_LAST_MODIFIED, ServletRequestAttributes.SCOPE_REQUEST);
         if (lastMod == null) {
-            lastMod = profileDao.retrieveLastModifiedDate(orcid);
+            lastMod = profileDao.retrieveLastModifiedDate(orcid, indicator);
 //            if (sra != null)
 //                sra.setAttribute(ProfileLastModifiedAspect.REQUEST_PROFILE_LAST_MODIFIED, lastMod,ServletRequestAttributes.SCOPE_REQUEST);
         }
@@ -679,7 +679,7 @@ public class ProfileEntityManagerImpl implements ProfileEntityManager {
     @Override
     @Transactional
     public Person getPersonDetails(String orcid) {        
-        Date lastModified = getLastModified(orcid);
+        Date lastModified = getLastModified(orcid, "0=0");
         long lastModifiedTime = (lastModified == null) ? 0 : lastModified.getTime();
         Person person = new Person();
         Biography biography = biographyManager.getBiography(orcid);
@@ -731,7 +731,7 @@ public class ProfileEntityManagerImpl implements ProfileEntityManager {
             person.setName(name);
         }
 		
-        Date lastModified = getLastModified(orcid);
+        Date lastModified = getLastModified(orcid, "2=2");
         long lastModifiedTime = (lastModified == null) ? 0 : lastModified.getTime();
         person.setAddresses(addressManager.getPublicAddresses(orcid, lastModifiedTime));
         LastModifiedDate latest = person.getAddresses().getLastModifiedDate();

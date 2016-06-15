@@ -69,7 +69,7 @@ public class CerifApiServiceDelegatorImpl implements CerifApiServiceDelgator {
     private CerifTypeTranslator translator = new CerifTypeTranslator();
 
     private long getLastModifiedTime(String orcid) {
-        Date lastModified = profileEntityManager.getLastModified(orcid);
+        Date lastModified = profileEntityManager.getLastModified(orcid,"4=4");
         return (lastModified == null) ? 0 : lastModified.getTime();
     }
     
@@ -122,7 +122,7 @@ public class CerifApiServiceDelegatorImpl implements CerifApiServiceDelgator {
 
     @Override
     public Response getProduct(String orcid, Long id) {
-        Date lastModified = profileEntityManager.getLastModified(orcid);
+        Date lastModified = profileEntityManager.getLastModified(orcid,"5=5");
         long lastModifiedTime = (lastModified == null) ? 0 : lastModified.getTime();
         WorkSummary ws = workManager.getWorkSummary(orcid, id, lastModifiedTime);
         ActivityUtils.cleanEmptyFields(ws);

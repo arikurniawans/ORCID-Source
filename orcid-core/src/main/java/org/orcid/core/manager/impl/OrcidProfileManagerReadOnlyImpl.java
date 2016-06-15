@@ -248,7 +248,7 @@ public class OrcidProfileManagerReadOnlyImpl implements OrcidProfileManagerReadO
 
     @Override
     public Date retrieveLastModifiedDate(String orcid) {
-        return profileEntityManager.getLastModified(orcid);
+        return profileEntityManager.getLastModified(orcid, "13=13");
     }
 
     @Deprecated

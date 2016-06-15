@@ -173,7 +173,7 @@ public class PeerReviewsController extends BaseWorkspaceController {
      */
     private List<String> createPeerReviewIdList(HttpServletRequest request) {
         String orcid = getCurrentUserOrcid();
-        java.util.Date lastModified = profileEntityManager.getLastModified(orcid);
+        java.util.Date lastModified = profileEntityManager.getLastModified(orcid, "15=15");
         List<PeerReview> peerReviews = peerReviewManager.findPeerReviews(orcid, lastModified.getTime());
         
         Map<String, String> languages = lm.buildLanguageMap(getUserLocale(), false);

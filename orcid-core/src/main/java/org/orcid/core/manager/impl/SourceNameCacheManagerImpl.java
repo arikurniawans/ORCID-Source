@@ -88,6 +88,9 @@ public class SourceNameCacheManagerImpl implements SourceNameCacheManager {
                         sourceNameCache.put(new Element(key, sourceNameData));
                     }
                 }
+            } catch(Exception e) {
+                LOGGER.error("Error fetching source name for: " + sourceId, e);
+                throw e;
             } finally {
                 lockers.releaseLock(sourceId);
             }
