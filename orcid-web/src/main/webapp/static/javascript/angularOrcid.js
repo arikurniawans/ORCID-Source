@@ -6008,11 +6008,17 @@ orcidNgModule.controller('WorkCtrl', ['$scope', '$compile', '$filter', 'worksSrv
             workCategory = $scope.editWork.workCategory.value;
         else
             return; //do nothing if we have not types
+        
+        console.log('1 ' + angular.toJson($scope.editWork.workType.value))
+        
         $.ajax({
             url: getBaseUri() + '/works/loadWorkTypes.json?workCategory=' + workCategory,
             contentType: 'application/json;charset=UTF-8',
             dataType: 'json',
             success: function(data) {
+            	
+            	console.log('2 ' + angular.toJson($scope.editWork.workType.value))
+            	
                 $scope.$apply(function() {
                     $scope.types = data;
                     if($scope.editWork != null && $scope.editWork.workCategory != null) {
