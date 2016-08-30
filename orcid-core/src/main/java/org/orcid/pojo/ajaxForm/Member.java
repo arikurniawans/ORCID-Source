@@ -23,6 +23,7 @@ import java.util.List;
 import org.orcid.jaxb.model.clientgroup.MemberType;
 import org.orcid.jaxb.model.clientgroup.OrcidClientGroup;
 import org.orcid.persistence.jpa.entities.ProfileEntity;
+import org.orcid.utils.OrcidStringUtils;
 
 public class Member implements ErrorsInterface, Serializable {
     private static final long serialVersionUID = 1L;
@@ -50,7 +51,9 @@ public class Member implements ErrorsInterface, Serializable {
     	group.setEmail(Text.valueOf(profile.getPrimaryEmail().getId()));
     	
     	if(profile.getRecordNameEntity() != null) {
-    	    group.setGroupName(Text.valueOf(profile.getRecordNameEntity().getCreditName()));
+    	    String creditName = profile.getRecordNameEntity().getCreditName();
+    	    creditName = OrcidStringUtils.decodeSimpleHtml(creditName);
+    	    group.setGroupName(Text.valueOf(creditName));
     	} 
     	
     	group.setGroupOrcid(Text.valueOf(profile.getId()));

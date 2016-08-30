@@ -26,6 +26,7 @@ import org.orcid.persistence.dao.RecordNameDao;
 import org.orcid.persistence.jpa.entities.ClientDetailsEntity;
 import org.orcid.persistence.jpa.entities.RecordNameEntity;
 import org.orcid.pojo.ajaxForm.PojoUtil;
+import org.orcid.utils.OrcidStringUtils;
 import org.orcid.utils.ReleaseNameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,6 +73,9 @@ public class SourceNameCacheManagerImpl implements SourceNameCacheManager {
                         if (sourceName == null) {
                             sourceNameCache.put(new Element(cacheKey, StringUtils.EMPTY));
                         } else {
+                            //Source name contains encoded characters, so, lets decode them here
+                            //See OrcidStringUtils.stripHtml
+                            sourceName = OrcidStringUtils.decodeSimpleHtml(sourceName);
                             sourceNameCache.put(new Element(cacheKey, sourceName));
                         }                        
                     }                    

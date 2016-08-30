@@ -1356,7 +1356,8 @@ public class OrcidProfileManagerImpl extends OrcidProfileManagerReadOnlyImpl imp
                     if (profile != null) {
                         if(profile.getRecordNameEntity() != null) {
                             if (org.orcid.jaxb.model.common_rc3.Visibility.PUBLIC.equals(profile.getRecordNameEntity().getVisibility())) {
-                                contributor.setCreditName(new CreditName(profile.getRecordNameEntity().getCreditName()));
+                                String creditName = OrcidStringUtils.decodeSimpleHtml(profile.getRecordNameEntity().getCreditName());
+                                contributor.setCreditName(new CreditName(creditName));
                             }
                         }                         
                     }

@@ -272,6 +272,7 @@ public class ManageProfileController extends BaseWorkspaceController {
             }        
                     
             if (StringUtils.isNotBlank(creditName)) {
+                creditName = OrcidStringUtils.decodeSimpleHtml(creditName);
                 summary.setCreditName(new CreditName(creditName));
             }
             List<DelegationDetails> detailsList = new ArrayList<>(1);
@@ -999,6 +1000,7 @@ public class ManageProfileController extends BaseWorkspaceController {
                             creditName = delegateProfile.getRecordNameEntity().getCreditName();
                         }
                         if (StringUtils.isNotBlank(creditName)) {
+                            creditName = OrcidStringUtils.decodeSimpleHtml(creditName);
                             summary.setCreditName(new CreditName(creditName));
                         }
                         List<DelegationDetails> detailsList = new ArrayList<>(1);

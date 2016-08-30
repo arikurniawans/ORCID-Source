@@ -24,6 +24,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
 import org.apache.commons.lang.StringUtils;
+import org.orcid.utils.OrcidStringUtils;
 
 /**
  * 
@@ -98,11 +99,12 @@ public class SourceEntity implements Serializable {
                 // visible
                 if (org.orcid.jaxb.model.common_rc3.Visibility.PUBLIC.equals(sourceProfile.getRecordNameEntity().getVisibility())) {
                     if (!StringUtils.isEmpty(sourceProfile.getRecordNameEntity().getCreditName())) {
-                        return sourceProfile.getRecordNameEntity().getCreditName();
+                        return OrcidStringUtils.decodeSimpleHtml(sourceProfile.getRecordNameEntity().getCreditName());
                     } else {
                         // If credit name is empty
-                        return sourceProfile.getRecordNameEntity().getGivenNames() + (StringUtils.isEmpty(sourceProfile.getRecordNameEntity().getFamilyName()) ? ""
+                        String creditName = sourceProfile.getRecordNameEntity().getGivenNames() + (StringUtils.isEmpty(sourceProfile.getRecordNameEntity().getFamilyName()) ? ""
                                 : " " + sourceProfile.getRecordNameEntity().getFamilyName());
+                        return OrcidStringUtils.decodeSimpleHtml(creditName);
                     }
                 } else {
                     return null;

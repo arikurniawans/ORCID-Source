@@ -95,6 +95,16 @@ public class OrcidStringUtils {
 		return map;
 	}
 
+	public static String decodeSimpleHtml(String s) {
+	    if(StringUtils.isEmpty(s)) {
+	        return s;
+	    }
+	    String result = s.replace(APOS, DECODED_APOS);
+	    result = result.replace(AMP, DECODED_AMP);
+	    result = result.replace(QUOT, DECODED_QUOT);
+            return result;	    
+	}
+	
 	public static String stripHtml(String s) {
 	    return Jsoup.clean(s, "", Whitelist.none(), outputSettings);
 	}

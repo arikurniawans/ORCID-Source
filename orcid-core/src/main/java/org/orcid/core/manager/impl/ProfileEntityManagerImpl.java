@@ -110,6 +110,7 @@ import org.orcid.persistence.jpa.entities.ResearcherUrlEntity;
 import org.orcid.pojo.ApplicationSummary;
 import org.orcid.pojo.ajaxForm.Claim;
 import org.orcid.pojo.ajaxForm.PojoUtil;
+import org.orcid.utils.OrcidStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -732,20 +733,20 @@ public class ProfileEntityManagerImpl implements ProfileEntityManager {
         
         //If it is a member, return the credit name
         if(OrcidType.GROUP.equals(member.getOrcidType())) {
-            return recordName.getCreditName();                    
+            return OrcidStringUtils.decodeSimpleHtml(recordName.getCreditName());                    
         }
         
         Visibility namesVisibilty = recordName.getVisibility();   
         if(Visibility.PUBLIC.equals(namesVisibilty)) {
             if(!PojoUtil.isEmpty(recordName.getCreditName())) {
-                return recordName.getCreditName();
+                return OrcidStringUtils.decodeSimpleHtml(recordName.getCreditName());
             } else {
                 String displayName = recordName.getGivenNames();
                 String familyName = recordName.getFamilyName();
                 if (StringUtils.isNotBlank(familyName)) {
                     displayName += " " + familyName;
                 }                
-                return displayName;
+                return OrcidStringUtils.decodeSimpleHtml(displayName);
             }
         }
         
@@ -779,7 +780,7 @@ public class ProfileEntityManagerImpl implements ProfileEntityManager {
                 }
             } 
         }
-        return publicName;
+        return OrcidStringUtils.decodeSimpleHtml(publicName);
     }
 
     @Override

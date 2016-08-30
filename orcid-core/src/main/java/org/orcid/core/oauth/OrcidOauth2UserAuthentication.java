@@ -23,6 +23,7 @@ import org.orcid.jaxb.model.common_rc3.Visibility;
 import org.orcid.persistence.jpa.entities.ProfileEntity;
 import org.orcid.persistence.jpa.entities.RecordNameEntity;
 import org.orcid.pojo.ajaxForm.PojoUtil;
+import org.orcid.utils.OrcidStringUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.util.Assert;
@@ -171,10 +172,11 @@ public class OrcidOauth2UserAuthentication implements Authentication {
         
         if(Visibility.PUBLIC.value().equals(recordName.getVisibility())) {
             if(!PojoUtil.isEmpty(recordName.getCreditName())) {
-                return recordName.getCreditName();
+                return OrcidStringUtils.decodeSimpleHtml(recordName.getCreditName());
             } else {
                 if(!PojoUtil.isEmpty(recordName.getFamilyName())) {
-                    return recordName.getGivenNames() + " " + recordName.getFamilyName();
+                    String result = recordName.getGivenNames() + " " + recordName.getFamilyName();
+                    return OrcidStringUtils.decodeSimpleHtml(result);
                 }
             }
         }

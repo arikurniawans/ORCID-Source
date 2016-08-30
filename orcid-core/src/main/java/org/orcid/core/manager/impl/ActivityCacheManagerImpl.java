@@ -34,6 +34,7 @@ import org.orcid.jaxb.model.record_rc3.Work;
 import org.orcid.persistence.jpa.entities.ProfileEntity;
 import org.orcid.pojo.ajaxForm.PojoUtil;
 import org.orcid.pojo.ajaxForm.WorkForm;
+import org.orcid.utils.OrcidStringUtils;
 import org.springframework.cache.annotation.Cacheable;
 
 public class ActivityCacheManagerImpl extends Object implements ActivityCacheManager {
@@ -112,7 +113,7 @@ public class ActivityCacheManagerImpl extends Object implements ActivityCacheMan
             }                        
         }
                                           
-        return creditName;
+        return OrcidStringUtils.decodeSimpleHtml(creditName);
     }
     
     @Cacheable(value = "pub-credit-name", key = "#profile.getCacheKey()")
@@ -130,7 +131,7 @@ public class ActivityCacheManagerImpl extends Object implements ActivityCacheMan
             }            
         }
         
-        return publicCreditName;
+        return OrcidStringUtils.decodeSimpleHtml(publicCreditName);
     }
     
 }

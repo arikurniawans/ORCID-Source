@@ -42,6 +42,7 @@ import org.orcid.pojo.ajaxForm.OauthAuthorizeForm;
 import org.orcid.pojo.ajaxForm.PojoUtil;
 import org.orcid.pojo.ajaxForm.RequestInfoForm;
 import org.orcid.pojo.ajaxForm.ScopeInfoForm;
+import org.orcid.utils.OrcidStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.NoSuchMessageException;
@@ -218,6 +219,7 @@ public class OauthControllerBase extends BaseController {
             } 
                                     
             if(!PojoUtil.isEmpty(creditName)) {
+                creditName = OrcidStringUtils.decodeSimpleHtml(creditName);
                 infoForm.setUserName(URLDecoder.decode(creditName, "UTF-8").trim());
             }                        
         }        

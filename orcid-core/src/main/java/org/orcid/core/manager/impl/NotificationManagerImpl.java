@@ -86,6 +86,7 @@ import org.orcid.persistence.jpa.entities.RecordNameEntity;
 import org.orcid.persistence.jpa.entities.SourceEntity;
 import org.orcid.pojo.ajaxForm.PojoUtil;
 import org.orcid.utils.DateUtils;
+import org.orcid.utils.OrcidStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
@@ -470,7 +471,7 @@ public class NotificationManagerImpl implements NotificationManager {
         if(PojoUtil.isEmpty(result)) {
             result = LAST_RESORT_ORCID_USER_EMAIL_NAME; 
         }
-        return result;
+        return OrcidStringUtils.decodeSimpleHtml(result);
     }
 
     @Override

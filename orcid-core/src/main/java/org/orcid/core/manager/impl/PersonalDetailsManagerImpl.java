@@ -44,6 +44,7 @@ import org.orcid.persistence.jpa.entities.ProfileEntity;
 import org.orcid.persistence.jpa.entities.RecordNameEntity;
 import org.orcid.pojo.ajaxForm.PojoUtil;
 import org.orcid.utils.DateUtils;
+import org.orcid.utils.OrcidStringUtils;
 
 /**
 * 
@@ -71,13 +72,16 @@ public class PersonalDetailsManagerImpl implements PersonalDetailsManager {
                 }            
                 name.setVisibility(nameVisibility);            
                 if (!PojoUtil.isEmpty(recordName.getCreditName())) {
-                    name.setCreditName(new CreditName(recordName.getCreditName()));
+                    String creditName = OrcidStringUtils.decodeSimpleHtml(recordName.getCreditName());
+                    name.setCreditName(new CreditName(creditName));
                 }
                 if (!PojoUtil.isEmpty(recordName.getFamilyName())) {
-                    name.setFamilyName(new FamilyName(recordName.getFamilyName()));
+                    String familyName = OrcidStringUtils.decodeSimpleHtml(recordName.getFamilyName());
+                    name.setFamilyName(new FamilyName(familyName));
                 }
                 if (!PojoUtil.isEmpty(recordName.getGivenNames())) {
-                    name.setGivenNames(new GivenNames(recordName.getGivenNames()));
+                    String givenNames = OrcidStringUtils.decodeSimpleHtml(recordName.getGivenNames());
+                    name.setGivenNames(new GivenNames(givenNames));
                 }
                 
                 name.setCreatedDate(new CreatedDate(DateUtils.convertToXMLGregorianCalendar(recordName.getDateCreated())));

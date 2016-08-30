@@ -98,6 +98,7 @@ import org.orcid.pojo.ajaxForm.PeerReviewForm;
 import org.orcid.pojo.ajaxForm.PojoUtil;
 import org.orcid.pojo.ajaxForm.Text;
 import org.orcid.pojo.ajaxForm.WorkForm;
+import org.orcid.utils.OrcidStringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -692,6 +693,7 @@ public class PublicProfileController extends BaseWorkspaceController {
                         if (profileEntManager.orcidExists(contributorOrcid)) {
                             ProfileEntity profileEntity = profileEntityCacheManager.retrieve(contributorOrcid);
                             String publicContributorCreditName = cacheManager.getPublicCreditName(profileEntity);
+                            publicContributorCreditName = OrcidStringUtils.decodeSimpleHtml(publicContributorCreditName);
                             contributor.setCreditName(Text.valueOf(publicContributorCreditName));                            
                             if (profileEntity.getRecordNameEntity() != null && profileEntity.getRecordNameEntity().getVisibility() != null) {                                
                                 contributor.setCreditNameVisibility(org.orcid.pojo.ajaxForm.Visibility.valueOf(profileEntity.getRecordNameEntity().getVisibility()));

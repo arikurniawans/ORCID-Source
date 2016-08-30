@@ -50,6 +50,7 @@ import org.orcid.pojo.ajaxForm.Text;
 import org.orcid.pojo.ajaxForm.TranslatedTitleForm;
 import org.orcid.pojo.ajaxForm.WorkExternalIdentifier;
 import org.orcid.pojo.ajaxForm.WorkForm;
+import org.orcid.utils.OrcidStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -334,6 +335,7 @@ public class WorksController extends BaseWorkspaceController {
                         if (profileEntityManager.orcidExists(contributorOrcid)) {
                             ProfileEntity profileEntity = profileEntityCacheManager.retrieve(contributorOrcid);
                             String publicContributorCreditName = cacheManager.getPublicCreditName(profileEntity);
+                            publicContributorCreditName = OrcidStringUtils.decodeSimpleHtml(publicContributorCreditName);
                             contributor.setCreditName(Text.valueOf(publicContributorCreditName));
                             if(contributorOrcid.equals(getEffectiveUserOrcid())) {                                
                                 contributor.setCreditNameVisibility(org.orcid.pojo.ajaxForm.Visibility.valueOf(Visibility.PUBLIC));

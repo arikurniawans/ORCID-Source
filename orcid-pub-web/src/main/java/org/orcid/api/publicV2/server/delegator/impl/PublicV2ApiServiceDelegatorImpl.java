@@ -84,6 +84,7 @@ import org.orcid.persistence.dao.ProfileDao;
 import org.orcid.persistence.dao.WebhookDao;
 import org.orcid.persistence.jpa.entities.ProfileEntity;
 import org.orcid.persistence.jpa.entities.RecordNameEntity;
+import org.orcid.utils.OrcidStringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -236,6 +237,9 @@ public class PublicV2ApiServiceDelegatorImpl
                 }
             }
         }
+        //Credit name contains encoded characters, so, lets decode them here
+        //See OrcidStringUtils.stripHtml
+        creditName = OrcidStringUtils.decodeSimpleHtml(creditName);
         
         WorkToCiteprocTranslator tran = new  WorkToCiteprocTranslator();
         CSLItemData item = tran.toCiteproc(w, creditName ,true);

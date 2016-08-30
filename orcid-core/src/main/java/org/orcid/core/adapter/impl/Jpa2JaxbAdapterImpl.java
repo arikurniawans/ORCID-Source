@@ -1018,7 +1018,9 @@ public class Jpa2JaxbAdapterImpl implements Jpa2JaxbAdapter {
         if(recordName != null) {
             if (StringUtils.isNotBlank(recordName.getGivenNames())) {
                 GivenNames names = new GivenNames();
-                names.setContent(recordName.getGivenNames());
+                //Names contains encoded characters, so, lets decode them here
+                //See OrcidStringUtils.stripHtml                
+                names.setContent(OrcidStringUtils.decodeSimpleHtml(recordName.getGivenNames()));
                 names.setVisibility(recordName.getVisibility() == null ? OrcidVisibilityDefaults.NAMES_DEFAULT.getVisibility() : Visibility.fromValue(recordName.getVisibility().value()));
                 return names;
             }
@@ -1031,7 +1033,9 @@ public class Jpa2JaxbAdapterImpl implements Jpa2JaxbAdapter {
         if(recordName != null) {
             if (StringUtils.isNotBlank(recordName.getFamilyName())) {
                 FamilyName name = new FamilyName();
-                name.setContent(recordName.getFamilyName());
+                //Names contains encoded characters, so, lets decode them here
+                //See OrcidStringUtils.stripHtml                
+                name.setContent(OrcidStringUtils.decodeSimpleHtml(recordName.getFamilyName()));
                 name.setVisibility(recordName.getVisibility() == null ? OrcidVisibilityDefaults.NAMES_DEFAULT.getVisibility() : Visibility.fromValue(recordName.getVisibility().value()));
                 return name;
             }
@@ -1044,7 +1048,10 @@ public class Jpa2JaxbAdapterImpl implements Jpa2JaxbAdapter {
         if(recordName != null) {
             if (StringUtils.isNotBlank(recordName.getCreditName())) {
                 CreditName name = new CreditName();
-                name.setContent(recordName.getCreditName());
+                
+                //Names contains encoded characters, so, lets decode them here
+                //See OrcidStringUtils.stripHtml
+                name.setContent(OrcidStringUtils.decodeSimpleHtml(recordName.getCreditName()));
                 name.setVisibility(recordName.getVisibility() == null ? OrcidVisibilityDefaults.NAMES_DEFAULT.getVisibility() : Visibility.fromValue(recordName.getVisibility().value()));
                 return name;
             }
