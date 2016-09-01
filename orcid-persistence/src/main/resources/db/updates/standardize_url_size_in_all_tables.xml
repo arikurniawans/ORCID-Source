@@ -1,0 +1,42 @@
+<!--
+
+    =============================================================================
+
+    ORCID (R) Open Source
+    http://orcid.org
+
+    Copyright (c) 2012-2014 ORCID, Inc.
+    Licensed under an MIT-Style License (MIT)
+    http://orcid.org/open-source-license
+
+    This copyright and license information (including a link to the full license)
+    shall be included in its entirety in all copies or substantial portion of
+    the software.
+
+    =============================================================================
+
+-->
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+        
+        
+        <!-- REMOVE THIS BEFORE SENDING THE PULL REQUEST
+			--org disambiguated is ready
+			--org is ready
+			--notification is ready
+			--external_identifier is ready 
+		-->
+        
+    <changeSet id="STANDARDIZE-URL-SIZE-IN-ALL-TABLES" author="Angel Montenegro">
+    	<sql>ALTER TABLE researcher_url ALTER COLUMN url TYPE varchar(2000);</sql>
+    	<sql>ALTER TABLE profile_funding ALTER COLUMN url TYPE varchar(2000);</sql>
+    	<sql>ALTER TABLE peer_review ALTER COLUMN url TYPE varchar(2000), ALTER COLUMN subject_url TYPE varchar(2000);</sql>
+    	<sql>ALTER TABLE work ALTER COLUMN work_url TYPE varchar(2000);</sql>
+    	<sql>ALTER TABLE webhook ALTER COLUMN uri TYPE varchar(2000);</sql>
+    	<sql>ALTER TABLE userconnection ALTER COLUMN profileurl TYPE varchar(2000), ALTER COLUMN imageurl TYPE varchar(2000);</sql>
+    	<sql>ALTER TABLE client_details ALTER COLUMN client_website TYPE varchar(2000);</sql>
+    </changeSet>
+
+</databaseChangeLog>
+
+

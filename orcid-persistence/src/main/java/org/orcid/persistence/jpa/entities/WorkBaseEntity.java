@@ -29,6 +29,7 @@ import javax.persistence.Transient;
 
 import org.orcid.jaxb.model.message.Visibility;
 import org.orcid.jaxb.model.message.WorkType;
+import org.orcid.persistence.constants.SiteConstants;
 
 /**
  * An object that will contain the minimum work information needed to display
@@ -134,7 +135,7 @@ public class WorkBaseEntity extends SourceAwareEntity<Long> {
         this.description = description;
     }
 
-    @Column(name = "work_url", length = 350)
+    @Column(name = "work_url", length = SiteConstants.URL_MAX_LENGTH)
     public String getWorkUrl() {
         return workUrl;
     }

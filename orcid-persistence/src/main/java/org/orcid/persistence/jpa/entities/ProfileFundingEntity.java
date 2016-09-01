@@ -37,6 +37,7 @@ import javax.persistence.Table;
 
 import org.orcid.jaxb.model.message.FundingType;
 import org.orcid.jaxb.model.message.Visibility;
+import org.orcid.persistence.constants.SiteConstants;
 import org.orcid.utils.NullUtils;
 import org.orcid.utils.OrcidStringUtils;
 
@@ -171,7 +172,7 @@ public class ProfileFundingEntity extends SourceAwareEntity<Long> implements Com
         this.currencyCode = currencyCode;
     }
 
-    @Column(name = "url")
+    @Column(name = "url", length = SiteConstants.URL_MAX_LENGTH)
     public String getUrl() {
         return url;
     }

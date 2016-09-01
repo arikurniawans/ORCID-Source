@@ -76,7 +76,7 @@ public class ResearcherUrlEntity extends SourceAwareEntity<Long> implements Comp
         this.url = url;
     }
 
-    @Column(name = "url_name", length = SiteConstants.URL_MAX_LENGTH)
+    @Column(name = "url_name", length = 350)
     public String getUrlName() {
         return urlName;
     }

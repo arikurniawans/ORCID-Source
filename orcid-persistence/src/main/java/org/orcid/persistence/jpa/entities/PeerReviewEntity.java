@@ -38,6 +38,7 @@ import org.orcid.jaxb.model.message.Visibility;
 import org.orcid.jaxb.model.message.WorkType;
 import org.orcid.jaxb.model.record_rc3.PeerReviewType;
 import org.orcid.jaxb.model.record_rc3.Role;
+import org.orcid.persistence.constants.SiteConstants;
 import org.orcid.utils.OrcidStringUtils;
 
 @Entity
@@ -102,7 +103,7 @@ public class PeerReviewEntity extends SourceAwareEntity<Long> implements Compara
         this.externalIdentifiersJson = externalIdentifiersJson;
     }
 
-    @Column(name = "url", length = 350)
+    @Column(name = "url", length = SiteConstants.URL_MAX_LENGTH)
     public String getUrl() {
         return url;
     }
@@ -211,7 +212,7 @@ public class PeerReviewEntity extends SourceAwareEntity<Long> implements Compara
         this.subjectTranslatedNameLanguageCode = subjectTranslatedNameLanguageCode;
     }
 
-    @Column(name = "subject_url")
+    @Column(name = "subject_url", length = SiteConstants.URL_MAX_LENGTH)
     public String getSubjectUrl() {
         return subjectUrl;
     }
